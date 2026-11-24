@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/et_v_addStudent_gpa"
+        android:layout_width="127dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="G.P.A."
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_addStudent_email" />
+
     <Button
         android:id="@+id/btn_v_addStudent_back"
         android:layout_width="186dp"
@@ -29,31 +41,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="40dp"
         android:text="Major"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_v_addStudent_age" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_addStudent_age" />
 
     <TextView
         android:id="@+id/tv_v_addStudent_gpa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="148dp"
+        android:layout_marginEnd="156dp"
         android:text="G.P.A."
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_v_addStudent_email" />
-
-    <Spinner
-        android:id="@+id/sp_v_addStudent_gpa"
-        android:layout_width="186dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_v_addStudent_gpa" />
 
     <EditText
         android:id="@+id/et_v_addStudent_email"
@@ -66,6 +69,18 @@
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_v_addStudent_email" />
+
+    <EditText
+        android:id="@+id/et_v_addStudent_age"
+        android:layout_width="127dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Age"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_addStudent_email" />
 
     <TextView
         android:id="@+id/tv_v_addStudent_email"
@@ -169,15 +184,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_v_addStudent_title" />
 
-    <Spinner
-        android:id="@+id/sp_v_addStudent_age"
-        android:layout_width="186dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_v_addStudent_age" />
-
     <Button
         android:id="@+id/btn_v_addStudent_addStudent"
         android:layout_width="186dp"
@@ -187,5 +193,21 @@
         android:text="Add Student"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_v_addStudent_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        android:textColor="#F44336"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tv_v_addStudent_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

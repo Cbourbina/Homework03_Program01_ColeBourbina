@@ -55,7 +55,7 @@ public class StudentListAdapter extends BaseAdapter {
         studentFname.setText(student.getfName());
         studentLname.setText(student.getlName());
         studentEmail.setText(student.getEmail());
-        studentAge.setText(student.getAge());
+        studentAge.setText(String.valueOf(student.getAge()));
         studentGpa.setText(String.valueOf(student.getGpa()));
         studentMajor.setText(student.getMajor().getName());
 

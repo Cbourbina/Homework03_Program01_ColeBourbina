@@ -48,15 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
         dbHelper = new DataBaseHelper(this);
         dbHelper.initAllTables();
-//        listOfStudents = dbHelper.getAllStudents();
-//        Log.d("Major Record Count: ", Integer.toString(dbHelper.countRecordsFromTable("majors")));
-//        Log.d("Student Record Count: ", Integer.toString(dbHelper.countRecordsFromTable("students")));
-//        Major test = dbHelper.getMajorGivenId(2);
-//        Log.d("Major With ID #2", test.getName());
+        listOfStudents = dbHelper.getAllStudents();
+        Log.d("Major Record Count: ", Integer.toString(dbHelper.countRecordsFromTable("majors")));
+        Log.d("Student Record Count: ", Integer.toString(dbHelper.countRecordsFromTable("students")));
+        //Major test = dbHelper.getMajorGivenId(2);
+        //Log.d("Major With ID #2", test.getName());
         slAdapter = new StudentListAdapter(this, listOfStudents);
+        lv_j_listOfStudents.setAdapter(slAdapter);
 
         addStudentButtonClickEvent();
         addMajorButtonClickEvent();
+        Log.d("Student Count:", Integer.toString(listOfStudents.size()));
     }
 
     private void addStudentButtonClickEvent() {

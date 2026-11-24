@@ -83,41 +83,107 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public ArrayList<Student> getAllStudents() {
         ArrayList<Student> listOfStudents = new ArrayList<>();
         String selectAll = "SELECT * FROM " + students_table_name;
-        if (countRecordsFromTable(students_table_name) != 0)
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectAll, null);
+        int usernameIndex = cursor.getColumnIndex("username");
+        int fnameIndex = cursor.getColumnIndexOrThrow("fname");
+        int lnameIndex = cursor.getColumnIndexOrThrow("lname");
+        int emailIndex = cursor.getColumnIndexOrThrow("email");
+        int ageIndex = cursor.getColumnIndexOrThrow("age");
+        int gpaIndex = cursor.getColumnIndexOrThrow("gpa");
+        int majorIndex = cursor.getColumnIndexOrThrow("major_id");
+        while (cursor.moveToNext())
         {
-            SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.rawQuery(selectAll, null);
-            int recordCount = countRecordsFromTable(students_table_name);
-            if (recordCount != 0) {
-                cursor.moveToFirst();
-                String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
-                String fname = cursor.getString(cursor.getColumnIndexOrThrow("fname"));
-                String lname = cursor.getString(cursor.getColumnIndexOrThrow("lname"));
-                String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
-                int age = cursor.getInt(cursor.getColumnIndexOrThrow("age"));
-                float gpa = cursor.getFloat(cursor.getColumnIndexOrThrow("gpa"));
-                Major major = getMajorGivenId(cursor.getInt(cursor.getColumnIndexOrThrow("major_id")));
-                Student student = new Student(fname, lname, username, email, age, gpa, major);
-                listOfStudents.add(student);
-                for (int i = 0; i < recordCount - 1; i++)
-                {
-                    cursor.moveToNext();
-                    username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
-                    fname = cursor.getString(cursor.getColumnIndexOrThrow("fname"));
-                    lname = cursor.getString(cursor.getColumnIndexOrThrow("lname"));
-                    email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
-                    age = cursor.getInt(cursor.getColumnIndexOrThrow("age"));
-                    gpa = cursor.getFloat(cursor.getColumnIndexOrThrow("gpa"));
-                    major = getMajorGivenId(cursor.getInt(cursor.getColumnIndexOrThrow("major_id")));
-                    student = new Student(fname, lname, username, email, age, gpa, major);
-                    listOfStudents.add(student);
-                }
-                cursor.close();
-                db.close();
-            }
+            String username = cursor.getString(usernameIndex);
+            String fname = cursor.getString(fnameIndex);
+            String lname = cursor.getString(lnameIndex);
+            String email = cursor.getString(emailIndex);
+            int age = cursor.getInt(ageIndex);
+            float gpa = cursor.getFloat(gpaIndex);
+            Major major = getMajorGivenId(cursor.getInt(majorIndex));
+            Student student = new Student(fname, lname, username, email, age, gpa, major);
+            listOfStudents.add(student);
         }
+        cursor.close();
+        db.close();
         return listOfStudents;
     }
+
+    public ArrayList<Major> getAllMajors() {
+        ArrayList<Major> listOfMajors = new ArrayList<>();
+        String selectAll = "SELECT * FROM " + majors_table_name;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectAll, null);
+        int majorIdIndex = cursor.getColumnIndex("major_id");
+        int majorNameIndex = cursor.getColumnIndexOrThrow("major_name");
+        int majorPrefixIndex = cursor.getColumnIndexOrThrow("major_prefix");
+        while (cursor.moveToNext())
+        {
+            int major_id = cursor.getInt(majorIdIndex);
+            String major_name = cursor.getString(majorNameIndex);
+            String major_prefix = cursor.getString(majorPrefixIndex);
+            Major major = new Major(major_id, major_name, major_prefix);
+            listOfMajors.add(major);
+        }
+        cursor.close();
+        db.close();
+        return listOfMajors;
+    }
+
+    public ArrayList<String> getAllMajorNames() {
+        ArrayList<String> listOfMajorNames = new ArrayList<>();
+        String selectAll = "SELECT * FROM " + majors_table_name;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectAll, null);
+        int majorNameIndex = cursor.getColumnIndexOrThrow("major_name");
+        while (cursor.moveToNext())
+        {
+            String major_name = cursor.getString(majorNameIndex);
+            listOfMajorNames.add(major_name);
+        }
+        cursor.close();
+        db.close();
+        return listOfMajorNames;
+    }
+
+//    public ArrayList<Student> getAllStudents() {
+//        ArrayList<Student> listOfStudents = new ArrayList<>();
+//        String selectAll = "SELECT * FROM " + students_table_name;
+//        if (countRecordsFromTable(students_table_name) != 0)
+//        {
+//            SQLiteDatabase db = this.getReadableDatabase();
+//            Cursor cursor = db.rawQuery(selectAll, null);
+//            int recordCount = countRecordsFromTable(students_table_name);
+//            if (recordCount != 0) {
+//                cursor.moveToFirst();
+//                String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+//                String fname = cursor.getString(cursor.getColumnIndexOrThrow("fname"));
+//                String lname = cursor.getString(cursor.getColumnIndexOrThrow("lname"));
+//                String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+//                int age = cursor.getInt(cursor.getColumnIndexOrThrow("age"));
+//                float gpa = cursor.getFloat(cursor.getColumnIndexOrThrow("gpa"));
+//                Major major = getMajorGivenId(cursor.getInt(cursor.getColumnIndexOrThrow("major_id")));
+//                Student student = new Student(fname, lname, username, email, age, gpa, major);
+//                listOfStudents.add(student);
+//                for (int i = 0; i < recordCount - 1; i++)
+//                {
+//                    cursor.moveToNext();
+//                    username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+//                    fname = cursor.getString(cursor.getColumnIndexOrThrow("fname"));
+//                    lname = cursor.getString(cursor.getColumnIndexOrThrow("lname"));
+//                    email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+//                    age = cursor.getInt(cursor.getColumnIndexOrThrow("age"));
+//                    gpa = cursor.getFloat(cursor.getColumnIndexOrThrow("gpa"));
+//                    major = getMajorGivenId(cursor.getInt(cursor.getColumnIndexOrThrow("major_id")));
+//                    student = new Student(fname, lname, username, email, age, gpa, major);
+//                    listOfStudents.add(student);
+//                }
+//                cursor.close();
+//                db.close();
+//            }
+//        }
+//        return listOfStudents;
+//    }
 
     public Major getMajorGivenId(int major_id) {
         Major major;
@@ -136,7 +202,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         {
             major = null;
         }
-        db.close();
+        //db.close();
         return major;
+    }
+
+    public void addStudent(String fname, String lname, String username, String email, int age, float gpa, int majorId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("INSERT INTO " + students_table_name + " (username, fname, lname, email, age, gpa, major_id) VALUES ('" + username + "', '" + fname + "', '" + lname + "', '" + email + "', " + age + ", " + gpa + ", " + majorId + ");");
+        db.close();
     }
 }

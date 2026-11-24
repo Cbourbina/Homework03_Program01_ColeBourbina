@@ -6,17 +6,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_v_cell_gpa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="12dp"
-        android:text="GPA"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_v_cell_gpaTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_major" />
-
-    <TextView
         android:id="@+id/tv_v_cell_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,34 +17,25 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_majorTitle" />
 
     <TextView
-        android:id="@+id/tv_v_cell_gpaTitle"
+        android:id="@+id/tv_v_cell_fname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="GPA:"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="First Name"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_major"
-        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_major" />
+        app:layout_constraintStart_toEndOf="@+id/tv_v_cell_fnameTitle"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_v_cell_username"
+        android:id="@+id/tv_v_cell_lname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Username"
+        android:text="Last Name"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_lname"
-        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_lname" />
-
-    <TextView
-        android:id="@+id/tv_v_cell_major"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Major"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_email"
-        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_email" />
+        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_fname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_fname" />
 
     <TextView
         android:id="@+id/tv_v_cell_email"
@@ -68,25 +48,45 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_username" />
 
     <TextView
-        android:id="@+id/tv_v_cell_fname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="88dp"
-        android:text="First Name"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_v_cell_lname"
+        android:id="@+id/tv_v_cell_major"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Last Name"
+        android:text="Major"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_fname"
-        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_fname" />
+        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_email"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_email" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_gpaTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="GPA:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_major"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_major" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_gpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:text="GPA"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_v_cell_gpaTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_major" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Username"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_lname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_lname" />
 
     <TextView
         android:id="@+id/tv_v_cell_ageTitle"
