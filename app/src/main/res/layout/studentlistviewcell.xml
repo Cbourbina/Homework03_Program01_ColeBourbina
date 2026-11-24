@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_v_cell_gpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:text="GPA"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_v_cell_gpaTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_major" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:text="Age"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_v_cell_ageTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_majorTitle" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_gpaTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="GPA:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_major"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_major" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Username"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_lname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_lname" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_major"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Major"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_email"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_email" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Email"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_username"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_username" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_fname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="88dp"
+        android:text="First Name"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_lname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Last Name"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_v_cell_fname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_fname" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_ageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Age:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_majorTitle" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_majorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Major:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_emailTitle" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_emailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Email:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_usernameTitle" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_fnameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="First Name:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_lnameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Last Name:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_fnameTitle" />
+
+    <TextView
+        android:id="@+id/tv_v_cell_usernameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Username:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_cell_lnameTitle" />
+</androidx.constraintlayout.widget.ConstraintLayout>
