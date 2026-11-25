@@ -25,8 +25,10 @@ public class MainActivity extends AppCompatActivity {
     Button btn_j_addMajor;
     Intent intent_j_addStudent;
     Intent intent_j_addMajor;
+    Intent intent_j_studentDetails;
     StudentListAdapter slAdapter;
     DataBaseHelper dbHelper;
+    Bundle selectedStudent = new Bundle();
 
     private ArrayList<Student> listOfStudents;
     @Override
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         intent_j_addStudent = new Intent(MainActivity.this, AddStudent.class);
         intent_j_addMajor = new Intent(MainActivity.this, AddMajor.class);
+        intent_j_studentDetails = new Intent(MainActivity.this, studentDetails.class);
 
         dbHelper = new DataBaseHelper(this);
         dbHelper.initAllTables();
@@ -86,7 +89,16 @@ public class MainActivity extends AppCompatActivity {
         lv_j_listOfStudents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedStudent.putString("username", listOfStudents.get(position).getUsername());
+                selectedStudent.putString("fname", listOfStudents.get(position).getfName());
+                selectedStudent.putString("lname", listOfStudents.get(position).getlName());
+                selectedStudent.putString("email", listOfStudents.get(position).getEmail());
+                selectedStudent.putInt("age", listOfStudents.get(position).getAge());
+                selectedStudent.putFloat("gpa", listOfStudents.get(position).getGpa());
+                selectedStudent.putInt("majorId", listOfStudents.get(position).getMajor().getId());
 
+                intent_j_studentDetails.putExtras(selectedStudent);
+                startActivity(intent_j_studentDetails);
             }
         });
 

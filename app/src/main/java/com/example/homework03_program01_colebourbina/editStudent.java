@@ -23,7 +23,7 @@ public class editStudent extends AppCompatActivity {
     EditText et_j_editStudent_age;
     EditText et_j_editStudent_gpa;
     Spinner sp_j_editStudent_major;
-    Intent intent_main;
+    Intent intent_studentDetails;
     Button btn_j_editStudent_back;
     Button btn_j_editStudent_update;
 
@@ -45,7 +45,7 @@ public class editStudent extends AppCompatActivity {
         et_j_editStudent_age = findViewById(R.id.et_v_editStudent_age);
         et_j_editStudent_gpa = findViewById(R.id.et_v_editStudent_gpa);
         sp_j_editStudent_major = findViewById(R.id.sp_v_editStudent_major);
-        intent_main = new Intent(editStudent.this, MainActivity.class);
+        intent_studentDetails = new Intent(editStudent.this, studentDetails.class);
         btn_j_editStudent_back = findViewById(R.id.btn_v_editStudent_back);
         btn_j_editStudent_update = findViewById(R.id.btn_v_editStudent_update);
 
@@ -57,7 +57,7 @@ public class editStudent extends AppCompatActivity {
         btn_j_editStudent_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intent_main);
+                startActivity(intent_studentDetails);
             }
         });
     }

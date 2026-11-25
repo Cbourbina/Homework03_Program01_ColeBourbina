@@ -12,6 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class studentDetails extends AppCompatActivity {
 
     TextView tv_j_studentDetails_username;
@@ -25,6 +27,17 @@ public class studentDetails extends AppCompatActivity {
     Button btn_j_studentDetails_back;
     Intent intent_main;
     Intent intent_editStudent;
+    Bundle selectedStudent;
+    String studentUsername;
+    String studentFname;
+    String studentLname;
+    String studentEmail;
+    int studentAge;
+    float studentGpa;
+    int studentMajorId;
+    Major studentMajor;
+    ArrayList<Major> listOfMajors;
+    DataBaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +50,8 @@ public class studentDetails extends AppCompatActivity {
             return insets;
         });
 
+        selectedStudent  = getIntent().getExtras();
+        dbHelper = new DataBaseHelper(this);
         tv_j_studentDetails_username = findViewById(R.id.tv_v_studentDetails_username);
         tv_j_studentDetails_fname = findViewById(R.id.tv_v_studentDetails_fname);
         tv_j_studentDetails_lname = findViewById(R.id.tv_v_studentDetails_lname);
@@ -48,6 +63,30 @@ public class studentDetails extends AppCompatActivity {
         btn_j_studentDetails_back = findViewById(R.id.btn_v_studentDetails_back);
         intent_main = new Intent(studentDetails.this, MainActivity.class);
         intent_editStudent = new Intent(studentDetails.this, editStudent.class);
+        listOfMajors = dbHelper.getAllMajors();
+
+        if (selectedStudent != null)
+        {
+            studentUsername = selectedStudent.getString("username");
+            studentFname = selectedStudent.getString("fname");
+            studentLname = selectedStudent.getString("lname");
+            studentEmail = selectedStudent.getString("email");
+            studentAge = selectedStudent.getInt("age");
+            studentGpa = selectedStudent.getFloat("gpa");
+            studentMajorId = selectedStudent.getInt("majorId");
+            studentMajor = dbHelper.getMajorGivenId(studentMajorId);
+
+            tv_j_studentDetails_username.setText(studentUsername);
+            tv_j_studentDetails_fname.setText(studentFname);
+            tv_j_studentDetails_lname.setText(studentLname);
+            tv_j_studentDetails_email.setText(studentEmail);
+            tv_j_studentDetails_age.setText(String.valueOf(studentAge));
+            tv_j_studentDetails_gpa.setText(String.valueOf(studentGpa));
+            tv_j_studentDetails_major.setText(studentMajor.getName());
+        }
+
+        backButtonClickEvent();
+        editStudentButtonClickEvent();
     }
 
     private void backButtonClickEvent() {
