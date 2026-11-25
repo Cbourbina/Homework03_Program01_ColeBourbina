@@ -1,9 +1,11 @@
 package com.example.homework03_program01_colebourbina;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         addStudentButtonClickEvent();
         addMajorButtonClickEvent();
+        setOnClickListenersForListView();
         Log.d("Student Count:", Integer.toString(listOfStudents.size()));
     }
 
@@ -75,6 +78,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(intent_j_addMajor);
+            }
+        });
+    }
+
+    private void setOnClickListenersForListView() {
+        lv_j_listOfStudents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+        lv_j_listOfStudents.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String username = listOfStudents.get(position).getUsername();
+                dbHelper.deleteStudentByUsername(username);
+                listOfStudents.clear();
+                listOfStudents.addAll(dbHelper.getAllStudents());
+                slAdapter.notifyDataSetChanged();
+                return false;
             }
         });
     }

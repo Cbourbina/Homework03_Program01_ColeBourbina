@@ -31,6 +31,7 @@ public class AddStudent extends AppCompatActivity {
     Intent intent_main;
     ArrayList<String> listOfMajorNames;
     ArrayList<Major> listOfMajors;
+    ArrayList<Student> listOfStudents;
     TextView tv_j_addStudent_error;
     DataBaseHelper dbHelper;
 
@@ -53,6 +54,7 @@ public class AddStudent extends AppCompatActivity {
         dbHelper = new DataBaseHelper(this);
         listOfMajorNames = dbHelper.getAllMajorNames();
         listOfMajors = dbHelper.getAllMajors();
+        listOfStudents = dbHelper.getAllStudents();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listOfMajorNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -99,11 +101,14 @@ public class AddStudent extends AppCompatActivity {
                 else if (gpaNum < 0 || gpaNum > 4) {
                     displayErrorInvalidNumber();
                 }
+                else if (!isUsernameAvailable(username)) {
+                    displayErrorInvalidUsername();
+                }
                 else {
                     Major major = getMajorGivenName(majorName);
                     dbHelper.addStudent(fname, lname, username, email, ageNum, gpaNum, major.getId());
+                    clearFields();
                 }
-                clearFields();
             }
         });
     }
@@ -117,6 +122,12 @@ public class AddStudent extends AppCompatActivity {
     private void displayErrorInvalidNumber() {
         tv_j_addStudent_error.setVisibility(View.VISIBLE);
         String errorMessage = "Error. Please enter a valid number.";
+        tv_j_addStudent_error.setText(errorMessage);
+    }
+
+    private void displayErrorInvalidUsername() {
+        tv_j_addStudent_error.setVisibility(View.VISIBLE);
+        String errorMessage = "Error. Username already in use.";
         tv_j_addStudent_error.setText(errorMessage);
     }
 
@@ -137,5 +148,14 @@ public class AddStudent extends AppCompatActivity {
         et_j_addStudent_email.setText("");
         et_j_addStudent_age.setText("");
         et_j_addStudent_gpa.setText("");
+    }
+
+    private boolean isUsernameAvailable(String username) {
+        for (int i = 0; i < listOfStudents.size(); i++) {
+            if (listOfStudents.get(i).getUsername().equals(username)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

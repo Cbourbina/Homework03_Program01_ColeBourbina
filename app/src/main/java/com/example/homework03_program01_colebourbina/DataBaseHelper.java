@@ -211,4 +211,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + students_table_name + " (username, fname, lname, email, age, gpa, major_id) VALUES ('" + username + "', '" + fname + "', '" + lname + "', '" + email + "', " + age + ", " + gpa + ", " + majorId + ");");
         db.close();
     }
+
+    public void addMajor(String name, String prefix) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("INSERT INTO " + majors_table_name + " (major_name, major_prefix) VALUES ('" + name + "','" + prefix + "')");
+        db.close();
+    }
+
+    public void deleteStudentByUsername(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(students_table_name, "username = ?", new String[]{username});
+        db.close();
+    }
 }
