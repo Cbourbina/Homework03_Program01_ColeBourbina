@@ -68,41 +68,67 @@ public class studentDetails extends AppCompatActivity {
         if (selectedStudent != null)
         {
             studentUsername = selectedStudent.getString("username");
-            studentFname = selectedStudent.getString("fname");
-            studentLname = selectedStudent.getString("lname");
-            studentEmail = selectedStudent.getString("email");
-            studentAge = selectedStudent.getInt("age");
-            studentGpa = selectedStudent.getFloat("gpa");
-            studentMajorId = selectedStudent.getInt("majorId");
-            studentMajor = dbHelper.getMajorGivenId(studentMajorId);
-
+            //studentFname = selectedStudent.getString("fname");
+            //studentLname = selectedStudent.getString("lname");
+            //studentEmail = selectedStudent.getString("email");
+            //studentAge = selectedStudent.getInt("age");
+            //studentGpa = selectedStudent.getFloat("gpa");
+            //studentMajorId = selectedStudent.getInt("majorId");
+            //studentMajor = dbHelper.getMajorGivenId(studentMajorId, false);
+            Student student = dbHelper.getStudentGivenUsername(studentUsername);
             tv_j_studentDetails_username.setText(studentUsername);
-            tv_j_studentDetails_fname.setText(studentFname);
-            tv_j_studentDetails_lname.setText(studentLname);
-            tv_j_studentDetails_email.setText(studentEmail);
-            tv_j_studentDetails_age.setText(String.valueOf(studentAge));
-            tv_j_studentDetails_gpa.setText(String.valueOf(studentGpa));
-            tv_j_studentDetails_major.setText(studentMajor.getName());
+            tv_j_studentDetails_fname.setText(student.getfName());
+            tv_j_studentDetails_lname.setText(student.getlName());
+            tv_j_studentDetails_email.setText(student.getEmail());
+            tv_j_studentDetails_age.setText(String.valueOf(student.getAge()));
+            tv_j_studentDetails_gpa.setText(String.valueOf(student.getGpa()));
+            tv_j_studentDetails_major.setText(student.getMajor().getName());
         }
 
         backButtonClickEvent();
         editStudentButtonClickEvent();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        selectedStudent  = getIntent().getExtras();
+        if (selectedStudent != null)
+        {
+            studentUsername = selectedStudent.getString("username");
+            //studentFname = selectedStudent.getString("fname");
+            //studentLname = selectedStudent.getString("lname");
+            //studentEmail = selectedStudent.getString("email");
+            //studentAge = selectedStudent.getInt("age");
+            //studentGpa = selectedStudent.getFloat("gpa");
+            //studentMajorId = selectedStudent.getInt("majorId");
+            //studentMajor = dbHelper.getMajorGivenId(studentMajorId, false);
+            Student student = dbHelper.getStudentGivenUsername(studentUsername);
+            tv_j_studentDetails_username.setText(studentUsername);
+            tv_j_studentDetails_fname.setText(student.getfName());
+            tv_j_studentDetails_lname.setText(student.getlName());
+            tv_j_studentDetails_email.setText(student.getEmail());
+            tv_j_studentDetails_age.setText(String.valueOf(student.getAge()));
+            tv_j_studentDetails_gpa.setText(String.valueOf(student.getGpa()));
+            tv_j_studentDetails_major.setText(student.getMajor().getName());
+        }
+    }
+
     private void backButtonClickEvent() {
         btn_j_studentDetails_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intent_main);
+                finish();
             }
         });
     }
 
     private void editStudentButtonClickEvent() {
-        btn_j_studentDetails_back.setOnClickListener(new View.OnClickListener() {
+        btn_j_studentDetails_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intent_main);
+                intent_editStudent.putExtras(selectedStudent);
+                startActivity(intent_editStudent);
             }
         });
     }

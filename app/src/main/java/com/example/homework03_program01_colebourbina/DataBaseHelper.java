@@ -15,7 +15,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public DataBaseHelper(Context c)
     {
-        super(c, database_name, null, 1);
+        super(c, database_name, null, 4);
     }
 
     @Override
@@ -206,9 +206,40 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return major;
     }
 
+    public Major getMajorGivenId(int major_id, boolean isDbAlreadyOpen) {
+        Major major;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String checkMajorId = "SELECT * FROM " + majors_table_name + " WHERE major_id = '" + major_id + "';";
+        Cursor cursor = db.rawQuery(checkMajorId, null);
+        cursor.moveToFirst();
+
+        if (cursor.moveToFirst()) {
+            int id = major_id;
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("major_name"));
+            String prefix = cursor.getString(cursor.getColumnIndexOrThrow("major_prefix"));
+            major = new Major(id, name, prefix);
+        }
+        else
+        {
+            major = null;
+        }
+        if (!isDbAlreadyOpen) {
+            cursor.close();
+            db.close();
+        }
+        return major;
+    }
+
     public void addStudent(String fname, String lname, String username, String email, int age, float gpa, int majorId) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("INSERT INTO " + students_table_name + " (username, fname, lname, email, age, gpa, major_id) VALUES ('" + username + "', '" + fname + "', '" + lname + "', '" + email + "', " + age + ", " + gpa + ", " + majorId + ");");
+        db.close();
+    }
+
+    public void updateStudent(String username, String fname, String lname, String email, String age, String gpa, String majorId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String update = "UPDATE " + students_table_name + " SET fname = '" + fname + "', lname = '" + lname + "', email = '" + email + "', age = " + age + ", gpa = " + gpa + " WHERE username = '" + username + "';";
+        db.execSQL(update);
         db.close();
     }
 
@@ -222,5 +253,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(students_table_name, "username = ?", new String[]{username});
         db.close();
+    }
+
+    public Student getStudentGivenUsername(String u) {
+        Student student;
+        Major major;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String checkStudentUsername = "SELECT * FROM " + students_table_name + " WHERE username = '" + u + "';";
+        Cursor cursor = db.rawQuery(checkStudentUsername, null);
+        cursor.moveToFirst();
+
+        if (cursor.moveToFirst()) {
+            String username = u;
+            String fname = cursor.getString(cursor.getColumnIndexOrThrow("fname"));
+            String lname = cursor.getString(cursor.getColumnIndexOrThrow("lname"));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+            int age = cursor.getInt(cursor.getColumnIndexOrThrow("age"));
+            float gpa = cursor.getFloat(cursor.getColumnIndexOrThrow("gpa"));
+            major = getMajorGivenId(cursor.getInt(cursor.getColumnIndexOrThrow("major_id")));
+            student = new Student(fname, lname, username, email, age, gpa, major);
+        }
+        else
+        {
+            student = null;
+        }
+        db.close();
+        cursor.close();
+        return student;
     }
 }

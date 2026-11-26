@@ -67,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Student Count:", Integer.toString(listOfStudents.size()));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listOfStudents.clear();
+        listOfStudents.addAll(dbHelper.getAllStudents());
+        slAdapter.notifyDataSetChanged();
+    }
+
     private void addStudentButtonClickEvent() {
         btn_j_addStudent.setOnClickListener(new View.OnClickListener() {
             @Override
