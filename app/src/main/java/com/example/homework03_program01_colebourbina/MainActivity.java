@@ -23,9 +23,11 @@ public class MainActivity extends AppCompatActivity {
     ListView lv_j_listOfStudents;
     Button btn_j_addStudent;
     Button btn_j_addMajor;
+    Button btn_j_search;
     Intent intent_j_addStudent;
     Intent intent_j_addMajor;
     Intent intent_j_studentDetails;
+    Intent intent_j_search;
     StudentListAdapter slAdapter;
     DataBaseHelper dbHelper;
     Bundle selectedStudent = new Bundle();
@@ -45,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
         lv_j_listOfStudents = findViewById(R.id.lv_v_listOfStudents);
         btn_j_addStudent = findViewById(R.id.btn_v_addStudent);
         btn_j_addMajor = findViewById(R.id.btn_v_addMajor);
+        btn_j_search = findViewById(R.id.btn_v_search);
         listOfStudents = new ArrayList<>();
 
         intent_j_addStudent = new Intent(MainActivity.this, AddStudent.class);
         intent_j_addMajor = new Intent(MainActivity.this, AddMajor.class);
         intent_j_studentDetails = new Intent(MainActivity.this, studentDetails.class);
+        intent_j_search = new Intent(MainActivity.this, SearchStudent.class);
 
         dbHelper = new DataBaseHelper(this);
         dbHelper.initAllTables();
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         addStudentButtonClickEvent();
         addMajorButtonClickEvent();
         setOnClickListenersForListView();
+        searchButtonClickEvent();
         Log.d("Student Count:", Integer.toString(listOfStudents.size()));
     }
 
@@ -89,6 +94,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(intent_j_addMajor);
+            }
+        });
+    }
+
+    private void searchButtonClickEvent() {
+        btn_j_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent_j_search);
             }
         });
     }

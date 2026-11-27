@@ -281,4 +281,68 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return student;
     }
+
+    public ArrayList<Student> getFilteredStudents(String u, String f, String l, String majorId, String minGpa, String maxGpa) {
+        ArrayList<Student> listOfFilteredStudents = new ArrayList<>();
+        String selectStatement = "SELECT * FROM " + students_table_name + " WHERE ";
+        if (u.isEmpty()) {
+            selectStatement += "username is not null and ";
+        }
+        else {
+            selectStatement += "username LIKE '" + u + "%' and ";
+        }
+        if (f.isEmpty()) {
+            selectStatement += "fname is not null and ";
+        }
+        else {
+            selectStatement += "fname LIKE '" + f + "%' and ";
+        }
+        if (l.isEmpty()) {
+            selectStatement += "lname is not null and ";
+        }
+        else {
+            selectStatement += "lname LIKE '" + l + "%' and ";
+        }
+        if (majorId.isEmpty()) {
+            selectStatement += "major_id is not null and ";
+        }
+        else {
+            selectStatement += "major_id = " + majorId + " and ";
+        }
+        if (minGpa.isEmpty()) {
+            selectStatement += "gpa is not null and ";
+        }
+        else {
+            selectStatement += "gpa >= " + minGpa + " and ";
+        }
+        if (maxGpa.isEmpty()) {
+            selectStatement += "gpa is not null";
+        }
+        else {
+            selectStatement += "gpa <= " + maxGpa + ";";
+        }
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectStatement, null);
+        int usernameIndex = cursor.getColumnIndex("username");
+        int fnameIndex = cursor.getColumnIndexOrThrow("fname");
+        int lnameIndex = cursor.getColumnIndexOrThrow("lname");
+        int emailIndex = cursor.getColumnIndexOrThrow("email");
+        int ageIndex = cursor.getColumnIndexOrThrow("age");
+        int gpaIndex = cursor.getColumnIndexOrThrow("gpa");
+        int majorIndex = cursor.getColumnIndexOrThrow("major_id");
+        while (cursor.moveToNext()) {
+            String fname = cursor.getString(fnameIndex);
+            String lname = cursor.getString(lnameIndex);
+            String username = cursor.getString(usernameIndex);
+            String email = cursor.getString(emailIndex);
+            int age = cursor.getInt(ageIndex);
+            float gpa = cursor.getFloat(gpaIndex);
+            Major major = getMajorGivenId(cursor.getInt(majorIndex));
+            Student student = new Student(fname, lname, username, email, age, gpa, major);
+            listOfFilteredStudents.add(student);
+        }
+        cursor.close();
+        db.close();
+        return listOfFilteredStudents;
+    }
 }
