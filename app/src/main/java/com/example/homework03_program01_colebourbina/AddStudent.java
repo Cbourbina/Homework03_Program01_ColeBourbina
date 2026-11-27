@@ -107,6 +107,8 @@ public class AddStudent extends AppCompatActivity {
                 else {
                     Major major = getMajorGivenName(majorName);
                     dbHelper.addStudent(fname, lname, username, email, ageNum, gpaNum, major.getId());
+                    listOfStudents.clear();
+                    listOfStudents.addAll(dbHelper.getAllStudents());
                     clearFields();
                 }
             }

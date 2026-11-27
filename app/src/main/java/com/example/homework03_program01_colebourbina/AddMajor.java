@@ -63,7 +63,7 @@ public class AddMajor extends AppCompatActivity {
         btn_j_addMajor_addMajor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_j_addMajor_error.setVisibility(View.VISIBLE);
+                tv_j_addMajor_error.setVisibility(View.INVISIBLE);
                 String name = et_j_addMajor_name.getText().toString().trim();
                 String prefix = et_j_addMajor_prefix.getText().toString().trim();
                 if (name.isEmpty() || prefix.isEmpty()) {
@@ -77,6 +77,8 @@ public class AddMajor extends AppCompatActivity {
                 }
                 else {
                     dbHelper.addMajor(name, prefix);
+                    listOfMajors.clear();
+                    listOfMajors.addAll(dbHelper.getAllMajors());
                     clearFields();
                 }
             }

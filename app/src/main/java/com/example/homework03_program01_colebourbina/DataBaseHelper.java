@@ -15,7 +15,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public DataBaseHelper(Context c)
     {
-        super(c, database_name, null, 4);
+        super(c, database_name, null, 11);
     }
 
     @Override
@@ -238,7 +238,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void updateStudent(String username, String fname, String lname, String email, String age, String gpa, String majorId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String update = "UPDATE " + students_table_name + " SET fname = '" + fname + "', lname = '" + lname + "', email = '" + email + "', age = " + age + ", gpa = " + gpa + " WHERE username = '" + username + "';";
+        String update = "UPDATE " + students_table_name + " SET fname = '" + fname + "', lname = '" + lname + "', email = '" + email + "', age = " + age + ", gpa = " + gpa + ", major_id = " + majorId + " WHERE username = '" + username + "';";
         db.execSQL(update);
         db.close();
     }

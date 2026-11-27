@@ -42,6 +42,7 @@ public class editStudent extends AppCompatActivity {
     ArrayList<Major> listOfMajors;
     ArrayList<String> listOfMajorNames;
     DataBaseHelper dbHelper;
+    Intent intent_j_studentDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,8 @@ public class editStudent extends AppCompatActivity {
         btn_j_editStudent_back = findViewById(R.id.btn_v_editStudent_back);
         btn_j_editStudent_update = findViewById(R.id.btn_v_editStudent_update);
 
+        intent_j_studentDetails = new Intent(editStudent.this, studentDetails.class);
+
         listOfMajors = dbHelper.getAllMajors();
         listOfMajorNames = dbHelper.getAllMajorNames();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listOfMajorNames);
@@ -77,20 +80,21 @@ public class editStudent extends AppCompatActivity {
         if (selectedStudent != null)
         {
             studentUsername = selectedStudent.getString("username");
-            studentFname = selectedStudent.getString("fname");
-            studentLname = selectedStudent.getString("lname");
-            studentEmail = selectedStudent.getString("email");
-            studentAge = selectedStudent.getInt("age");
-            studentGpa = selectedStudent.getFloat("gpa");
-            studentMajorId = selectedStudent.getInt("majorId");
-            studentMajorIndex = getMajorIndexPosition(dbHelper.getMajorGivenId(studentMajorId, false));
+            //studentFname = selectedStudent.getString("fname");
+            //studentLname = selectedStudent.getString("lname");
+            //studentEmail = selectedStudent.getString("email");
+            //studentAge = selectedStudent.getInt("age");
+            //studentGpa = selectedStudent.getFloat("gpa");
+            //studentMajorId = selectedStudent.getInt("majorId");
+            Student student = dbHelper.getStudentGivenUsername(studentUsername);
+            studentMajorIndex = getMajorIndexPosition(student.getMajor());
 
             tv_j_editStudent_username.setText(studentUsername);
-            et_j_editStudent_fname.setText(studentFname);
-            et_j_editStudent_lname.setText(studentLname);
-            et_j_editStudent_email.setText(studentEmail);
-            et_j_editStudent_age.setText(String.valueOf(studentAge));
-            et_j_editStudent_gpa.setText(String.valueOf(studentGpa));
+            et_j_editStudent_fname.setText(student.getfName());
+            et_j_editStudent_lname.setText(student.getlName());
+            et_j_editStudent_email.setText(student.getEmail());
+            et_j_editStudent_age.setText(String.valueOf(student.getAge()));
+            et_j_editStudent_gpa.setText(String.valueOf(student.getGpa()));
             sp_j_editStudent_major.setSelection(studentMajorIndex);
 
         }
@@ -151,6 +155,14 @@ public class editStudent extends AppCompatActivity {
                     Major major = getMajorGivenName(majorName);
                     //dbHelper.addStudent(fname, lname, username, email, ageNum, gpaNum, major.getId());
                     dbHelper.updateStudent(username, fname,lname, email, age, gpa, String.valueOf(major.getId()));
+                    selectedStudent.putString("username", username);
+                    selectedStudent.putString("fname", fname);
+                    selectedStudent.putString("lname", lname);
+                    selectedStudent.putString("email", email);
+                    selectedStudent.putInt("age", Integer.parseInt(age));
+                    selectedStudent.putFloat("gpa", Float.parseFloat(gpa));
+                    selectedStudent.putInt("majorId", major.getId());
+                    intent_j_studentDetails.replaceExtras(selectedStudent);
                     finish();
                 }
             }

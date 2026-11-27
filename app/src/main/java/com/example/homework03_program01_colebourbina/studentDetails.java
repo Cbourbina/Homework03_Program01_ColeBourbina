@@ -127,7 +127,7 @@ public class studentDetails extends AppCompatActivity {
         btn_j_studentDetails_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent_editStudent.putExtras(selectedStudent);
+                intent_editStudent.replaceExtras(selectedStudent);
                 startActivity(intent_editStudent);
             }
         });
